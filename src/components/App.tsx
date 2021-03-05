@@ -3,7 +3,7 @@ import { useState, useCallback, useEffect } from 'react'
 import './App.css';
 
 const App = () => {
-  const wsClient = new WebSocket('/')
+  // const wsClient = new WebSocket('/')
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([]);
 
@@ -11,25 +11,25 @@ const App = () => {
     setInput(target.value)
   }
 
-  useEffect(()=>{
-  },[])
-  wsClient.onopen = () => {
-    console.log('open');
-  }
+  // useEffect(()=>{
+  // },[])
+  // wsClient.onopen = () => {
+  //   console.log('open');
+  // }
 
-  const wsPost = (input: string) => {
-    wsClient.send(input)
-    // console.log('1');
-  }
+  // const wsPost = (input: string) => {
+  //   wsClient.send(input)
+  //   // console.log('1');
+  // }
 
-  wsClient.onmessage = (message: any) => {
-    // console.log(message.data);
-    setMessages(pre => [...pre, message.data])
-  }
+  // wsClient.onmessage = (message: any) => {
+  //   // console.log(message.data);
+  //   setMessages(pre => [...pre, message.data])
+  // }
 
   const sendMessHandler = () => {
     setInput('');
-    wsPost(input)
+    // wsPost(input)
   }
 
   return (
