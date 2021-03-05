@@ -1,4 +1,7 @@
 {
+  "engines": {
+    "node": "14.x"
+  },
   "name": "apo-long-nards",
   "version": "1.0.0",
   "description": "long nards",
