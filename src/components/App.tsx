@@ -3,7 +3,7 @@ import { useState, useCallback, useEffect } from 'react'
 import './App.css';
 
 const App = () => {
-  const wsClient = new WebSocket('ws://localhost:3000')
+  const wsClient = new WebSocket('/')
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([]);
 
