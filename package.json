@@ -5,7 +5,7 @@
   "main": "webpack.config.js",
   "proxy": "http://localhost:3020",
   "scripts": {
-    "start": "webpack -p"
+    "postinstall": "webpack -p"
   },
   "repository": {
     "type": "git",
