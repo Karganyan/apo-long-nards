@@ -2,7 +2,7 @@
   "name": "apo-long-nards",
   "version": "1.0.0",
   "description": "long nards",
-  "main": "webpack.config.js",
+  "main": "index.js",
   "proxy": "http://localhost:3020",
   "scripts": {
     "postinstall": "webpack -p",
