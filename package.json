@@ -5,7 +5,7 @@
   "main": "webpack.config.js",
   "proxy": "http://localhost:3020",
   "scripts": {
-    "start": "concurrently 'npm run server' 'npm run prod'",
+    "start": "webpack-dev-server --mode production",
     "react": "webpack-dev-server",
     "server": "node ./server/server",
     "prod": "webpack-dev-server --mode production"
