@@ -5,7 +5,8 @@
   "main": "webpack.config.js",
   "proxy": "http://localhost:3020",
   "scripts": {
-    "postinstall": "webpack -p"
+    "postinstall": "webpack -p",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
