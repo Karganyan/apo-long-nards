@@ -37,6 +37,10 @@ const App = () => {
     wsPost(JSON.stringify({ message: input }))
   }
 
+  wsClient.onclose = () => {
+    console.log('ws bye');
+  }
+
   return (
     <>
       <div className="lol">
