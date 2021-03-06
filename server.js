@@ -5,7 +5,7 @@ const path = require('path')
 const app = express()
 const server = require('http').createServer(app)
 
-app.set('trust proxy', 1)
+// app.set('trust proxy', 1)
 // app.set('sessionName', 'sid')
 
 app.use(express.json())
