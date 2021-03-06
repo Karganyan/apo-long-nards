@@ -2,8 +2,12 @@ import * as React from 'react';
 import { useState, useCallback, useEffect } from 'react'
 import './App.css';
 
+const wsClient = new WebSocket(
+  window.location.origin.replace('http', 'ws')
+  // 'ws://localhost:3000'
+)
+
 const App = () => {
-  const wsClient = new WebSocket(window.location.origin.replace('http', 'ws'))
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([]);
 
@@ -11,25 +15,26 @@ const App = () => {
     setInput(target.value)
   }
 
-  useEffect(()=>{
-  },[])
+  console.log(window.location.origin);
+
   wsClient.onopen = () => {
-    console.log('open');
+    console.log('open ws connection on client');
   }
 
   const wsPost = (input: string) => {
     wsClient.send(input)
-    console.log('1');
+    console.log('send to serv');
   }
 
   wsClient.onmessage = (message: any) => {
-    console.log(message.data);
+    console.log('message from serv', message);
+    console.log('message.data from serv', message.data);
     setMessages(pre => [...pre, message.data])
   }
 
   const sendMessHandler = () => {
     setInput('');
-    wsPost(input)
+    wsPost(JSON.stringify({ message: input }))
   }
 
   return (
