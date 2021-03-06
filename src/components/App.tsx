@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useState, useCallback, useEffect } from 'react'
+import { isWsOpen } from '../helpers';
 import './App.css';
 
 const wsClient = new WebSocket(
@@ -21,20 +22,27 @@ const App = () => {
     console.log('open ws connection on client');
   }
 
-  const wsPost = (input: string) => {
-    wsClient.send(input)
-    console.log('send to serv');
+  const wsSend = (input: string, ws: any) => {
+    if (isWsOpen(ws)) {
+      ws.send(JSON.stringify({ message: input }));
+      setMessages(pre => [...pre, input])
+      console.log('send to serv');
+    } else {
+      return console.log('Something went wrong');
+
+    }
   }
 
-  wsClient.onmessage = (message: any) => {
-    console.log('message from serv', message);
-    console.log('message.data from serv', message.data);
-    setMessages(pre => [...pre, message.data])
+  wsClient.onmessage = ({ data }: any) => {
+    console.log(data);
+    const { message } = JSON.parse(data);
+    console.log(message);
+    setMessages(pre => [...pre, message])
   }
 
   const sendMessHandler = () => {
     setInput('');
-    wsPost(JSON.stringify({ message: input }))
+    wsSend(input, wsClient)
   }
 
   wsClient.onclose = () => {
@@ -53,6 +61,7 @@ const App = () => {
           <div key={message + Math.random()}>
             {message}
           </div>
+          // {sending && }
         ))}
       </div>
     </>
