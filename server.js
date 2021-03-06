@@ -4,11 +4,11 @@ const WebSocket = require('ws');
 const path = require('path')
 const app = express()
 const server = require('http').createServer(app)
-const logger = require('morgan')
+// const logger = require('morgan')
 
 // app.set('trust proxy', 1)
 // app.set('sessionName', 'sid')
-app.use(logger('server'))
+// app.use(logger('server'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
