@@ -9,6 +9,7 @@ const wsClient = new WebSocket(
 )
 
 const App = () => {
+  // const [connect, setConnect] = useState(false)
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([]);
 
