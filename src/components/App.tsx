@@ -1,13 +1,10 @@
 import * as React from 'react';
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useMemo, useCallback } from 'react'
 import { isWsOpen } from '../helpers';
 import './App.css';
 
 let wsClient: any;
-wsClient = new WebSocket(
-  window.location.origin.replace('http', 'ws')
-  // 'ws://localhost:3000'
-)
+
 
 const App = () => {
   const [input, setInput] = useState('');
@@ -33,6 +30,13 @@ const App = () => {
 
   function connect() {
 
+    wsClient = new WebSocket(
+      window.location.origin.replace('http', 'ws')
+      // 'ws://localhost:3000'
+    )
+
+    console.log('lol');
+    
     wsClient.onopen = () => {
       console.log('open ws connection on client');
     }
@@ -48,8 +52,9 @@ const App = () => {
       if (e.code !== 1000) {
         console.log('try to reconnect');
         setTimeout(function () {
+          console.log('try to reconnect in setTimeout');
           connect();
-        }, 1000);
+        }, 5000);
       } else {
         console.log('ws bye');
       }
@@ -67,7 +72,7 @@ const App = () => {
     }
   }
 
-  connect()
+  document.addEventListener("DOMContentLoaded", connect)
 
   return (
     <>
