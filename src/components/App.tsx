@@ -68,11 +68,9 @@ const App = () => {
 
     if (e.code !== 1000) {
       console.log('try to reconnect');
-      setTimeout(() => {
-        wsClient.onopen = () => {
-          console.log('ws reconnection after nonClient close');
-        }
-      }, 2000);
+      wsClient.onopen = () => {
+        console.log('ws reconnection after nonClient close');
+      }
     } else {
       console.log('ws bye');
     }
