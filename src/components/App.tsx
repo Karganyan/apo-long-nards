@@ -3,7 +3,8 @@ import { useState, useCallback, useEffect } from 'react'
 import { isWsOpen } from '../helpers';
 import './App.css';
 
-const wsClient = new WebSocket(
+let wsClient: any;
+wsClient = new WebSocket(
   window.location.origin.replace('http', 'ws')
   // 'ws://localhost:3000'
 )
@@ -16,34 +17,7 @@ const App = () => {
     setInput(target.value)
   }
 
-  //--------------------------------------//
-  var hidden: any, visibilityChange: any;
-  if (typeof document.hidden !== "undefined") { // Opera 12.10 and Firefox 18 and later support
-    hidden = "hidden";
-    visibilityChange = "visibilitychange";
-  }
-
-  function handleVisibilityChange() {
-    if (!document.hidden) {
-      wsClient.onopen = () => {
-        console.log('ws reconnection after nonClient close');
-      }
-    }
-  }
-  // Warn if the browser doesn't support addEventListener or the Page Visibility API
-  if (typeof document.addEventListener !== "undefined" || hidden) {
-    document.addEventListener(visibilityChange, handleVisibilityChange);
-  } else {
-    console.log("This demo requires a browser, such as Google Chrome or Firefox, that supports the Page Visibility API.");
-  }
-  //--------------------------------------//
-
-  wsClient.onopen = () => {
-    console.log('open ws connection on client');
-  }
-
   const wsSend = (input?: string, ws?: any) => {
-
     if (isWsOpen(ws)) {
       ws.send(JSON.stringify({ message: input }));
       setMessages(pre => [...pre, input])
@@ -52,45 +26,48 @@ const App = () => {
     return console.log('Something went wrong');
   }
 
-  wsClient.onmessage = ({ data }: any) => {
-    console.log(data);
-    const { message } = JSON.parse(data);
-    console.log(message);
-    setMessages(pre => [...pre, message])
-  }
-
   const sendMessHandler = () => {
     setInput('');
     wsSend(input, wsClient)
   }
 
-  function reconnect() {
+  function connect() {
+
     wsClient.onopen = () => {
-      console.log('ws reconnection after nonClient close');
+      console.log('open ws connection on client');
     }
-  }
 
-  wsClient.onclose = (e: any) => {
-
-    if (e.code !== 1000) {
-      console.log('try to reconnect');
-      reconnect()
-    } else {
-      console.log('ws bye');
+    wsClient.onmessage = ({ data }: any) => {
+      console.log(data);
+      const { message } = JSON.parse(data);
+      console.log(message);
+      setMessages(pre => [...pre, message])
     }
-  }
 
-  wsClient.onerror = (e: any) => {
-
-    if (e.code === 'ECONNREFUSED') {
-      console.log('ws wtf error, try recconect');
-      wsClient.onopen = () => {
-        console.log('ws reconnection after ECONNREFUSED error');
+    wsClient.onclose = function (e: any) {
+      if (e.code !== 1000) {
+        console.log('try to reconnect');
+        setTimeout(function () {
+          connect();
+        }, 1000);
+      } else {
+        console.log('ws bye');
       }
-    } else {
-      console.log('that is a unknown error bro, call to developer');
+    };
+
+    wsClient.onerror = (e: any) => {
+      if (e.code === 'ECONNREFUSED') {
+        console.log('ws reconnection after ECONNREFUSED error');
+        setTimeout(function () {
+          connect();
+        }, 1000);
+      } else {
+        console.log('that is a unknown error bro, call to developer');
+      }
     }
   }
+
+  connect()
 
   return (
     <>
@@ -111,3 +88,27 @@ const App = () => {
 }
 
 export default App
+
+
+
+  //--------------------------------------//
+  // var hidden: any, visibilityChange: any;
+  // if (typeof document.hidden !== "undefined") { // Opera 12.10 and Firefox 18 and later support
+  //   hidden = "hidden";
+  //   visibilityChange = "visibilitychange";
+  // }
+
+  // function handleVisibilityChange() {
+  //   if (!document.hidden) {
+  //     wsClient.onopen = () => {
+  //       console.log('ws reconnection after nonClient close');
+  //     }
+  //   }
+  // }
+  // // Warn if the browser doesn't support addEventListener or the Page Visibility API
+  // if (typeof document.addEventListener !== "undefined" || hidden) {
+  //   document.addEventListener(visibilityChange, handleVisibilityChange);
+  // } else {
+  //   console.log("This demo requires a browser, such as Google Chrome or Firefox, that supports the Page Visibility API.");
+  // }
+  //--------------------------------------//
