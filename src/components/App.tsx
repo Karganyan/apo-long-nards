@@ -64,13 +64,17 @@ const App = () => {
     wsSend(input, wsClient)
   }
 
+  function reconnect() {
+    wsClient.onopen = () => {
+      console.log('ws reconnection after nonClient close');
+    }
+  }
+
   wsClient.onclose = (e: any) => {
 
     if (e.code !== 1000) {
       console.log('try to reconnect');
-      wsClient.onopen = () => {
-        console.log('ws reconnection after nonClient close');
-      }
+      reconnect()
     } else {
       console.log('ws bye');
     }
