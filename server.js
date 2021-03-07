@@ -20,14 +20,7 @@ const wsServer = new WebSocket.Server({
 });
 
 wsServer.on('connection', (ws) => {
-  console.log('connected ws');
-
-  const interval = setInterval(() => {
-    console.log(wsServer.clients.size);
-  }, 20000);
-  setTimeout(() => {
-    clearInterval(interval)
-  }, 1000000);
+  console.log('connected ws', wsServer.clients.size);
 
   ws.on('message', (mess) => {
     console.log('i get mess');
@@ -36,7 +29,7 @@ wsServer.on('connection', (ws) => {
 
     wsServer.clients.forEach((client => {
       if (client.readyState === WebSocket.OPEN && client !== ws) {
-        console.log('hey i send mess');
+        console.log('hey i send mess to all clients except this.client');
         client.send(JSON.stringify({ message }))
       }
     }))

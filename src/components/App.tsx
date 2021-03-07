@@ -50,11 +50,11 @@ const App = () => {
 
     wsClient.onclose = function (e: any) {
       if (e.code !== 1000) {
-        console.log('try to reconnect');
+        // console.log('try to reconnect');
         setTimeout(function () {
-          console.log('try to reconnect in setTimeout');
+          // console.log('try to reconnect in setTimeout');
           connect();
-        }, 5000);
+        }, 1000);
       } else {
         console.log('ws bye');
       }
@@ -62,12 +62,12 @@ const App = () => {
 
     wsClient.onerror = (e: any) => {
       if (e.code === 'ECONNREFUSED') {
-        console.log('ws reconnection after ECONNREFUSED error');
+        // console.log('ws reconnection after ECONNREFUSED error');
         setTimeout(function () {
           connect();
         }, 1000);
       } else {
-        console.log('that is a unknown error bro, call to developer');
+        // console.log('that is a unknown error bro, call to developer');
       }
     }
   }
@@ -93,27 +93,3 @@ const App = () => {
 }
 
 export default App
-
-
-
-  //--------------------------------------//
-  // var hidden: any, visibilityChange: any;
-  // if (typeof document.hidden !== "undefined") { // Opera 12.10 and Firefox 18 and later support
-  //   hidden = "hidden";
-  //   visibilityChange = "visibilitychange";
-  // }
-
-  // function handleVisibilityChange() {
-  //   if (!document.hidden) {
-  //     wsClient.onopen = () => {
-  //       console.log('ws reconnection after nonClient close');
-  //     }
-  //   }
-  // }
-  // // Warn if the browser doesn't support addEventListener or the Page Visibility API
-  // if (typeof document.addEventListener !== "undefined" || hidden) {
-  //   document.addEventListener(visibilityChange, handleVisibilityChange);
-  // } else {
-  //   console.log("This demo requires a browser, such as Google Chrome or Firefox, that supports the Page Visibility API.");
-  // }
-  //--------------------------------------//
