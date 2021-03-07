@@ -4,8 +4,8 @@ import { isWsOpen } from '../helpers';
 import './App.css';
 
 const wsClient = new WebSocket(
-  // window.location.origin.replace('http', 'ws')
-  'ws://localhost:3000'
+  window.location.origin.replace('http', 'ws')
+  // 'ws://localhost:3000'
 )
 
 const App = () => {
