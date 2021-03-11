@@ -1,9 +1,9 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-// const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-// const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin')
-// const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const webpack = require('webpack')
 
 module.exports = {
@@ -58,21 +58,21 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'style.css'
     })
+    ,
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }),
+    new DuplicatePackageCheckerPlugin(),
+    new webpack.optimize.AggressiveMergingPlugin()
   ],
-  //   new webpack.DefinePlugin({ 
-  //     'process.env': {
-  //       'NODE_ENV': JSON.stringify('production')
-  //     }
-  //   }),
-  //   new DuplicatePackageCheckerPlugin(),
-  //   new webpack.optimize.AggressiveMergingPlugin()
-  // ],
-  // optimization: {
-  //   minimizer: [
-  //     new OptimizeCssAssetsPlugin(),
-  //     new UglifyJsPlugin()
-  //   ],
-  // },
+  optimization: {
+    minimizer: [
+      new OptimizeCssAssetsPlugin(),
+      new UglifyJsPlugin()
+    ],
+  },
   // devtool: 'source-map',
   resolve: {
     extensions: ['.js', '.ts', '.tsx', 'jsx'],
