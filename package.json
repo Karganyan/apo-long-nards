@@ -8,7 +8,7 @@
   "main": "index.js",
   "proxy": "http://localhost:8080",
   "scripts": {
-    "start": "webpack -p",
+    "start": "webpack-dev-server -p",
     "dev": "webpack-dev-server",
     "server": "nodemon server.js"
   },
