@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { useState, useMemo, useCallback } from 'react'
-import { isWsOpen } from '../helpers';
-import './App.css';
+import { useState } from 'react'
+import { isWsOpen } from '../../helpers';
+import './App.scss';
+
 
 let wsClient: any;
-
 
 const App = () => {
   const [input, setInput] = useState('');
@@ -31,24 +31,22 @@ const App = () => {
   function connect() {
 
     wsClient = new WebSocket(
-      window.location.origin.replace('http', 'ws')
-      // 'ws://localhost:3000'
+      // window.location.origin.replace('http', 'ws')
+      'ws://localhost:3000'
     )
 
-    console.log('lol');
-    
-    wsClient.onopen = () => {
+    wsClient.onopen = (): void => {
       console.log('open ws connection on client');
     }
 
-    wsClient.onmessage = ({ data }: any) => {
+    wsClient.onmessage = ({ data }: any): void => {
       console.log(data);
       const { message } = JSON.parse(data);
       console.log(message);
       setMessages(pre => [...pre, message])
     }
 
-    wsClient.onclose = function (e: any) {
+    wsClient.onclose = function (e: any): void {
       if (e.code !== 1000) {
         // console.log('try to reconnect');
         setTimeout(function () {
@@ -60,7 +58,7 @@ const App = () => {
       }
     };
 
-    wsClient.onerror = (e: any) => {
+    wsClient.onerror = (e: any): void => {
       if (e.code === 'ECONNREFUSED') {
         // console.log('ws reconnection after ECONNREFUSED error');
         setTimeout(function () {

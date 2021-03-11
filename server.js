@@ -26,10 +26,9 @@ wsServer.on('connection', (ws) => {
     console.log('i get mess');
     const { message } = JSON.parse(mess)
     console.log(message);
-
+    console.log('hey i send mess to all clients except this.client');
     wsServer.clients.forEach((client => {
       if (client.readyState === WebSocket.OPEN && client !== ws) {
-        console.log('hey i send mess to all clients except this.client');
         client.send(JSON.stringify({ message }))
       }
     }))

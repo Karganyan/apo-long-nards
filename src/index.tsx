@@ -1,12 +1,15 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import App from './components/App';
+import { BrowserRouter } from 'react-router-dom';
+import App from './components/App/App';
+import './Index.scss'
 
-const lol = 'wtf this ts';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App/>
-  </React.StrictMode>,
+  <BrowserRouter>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </BrowserRouter>,
   document.getElementById('root')
 );
