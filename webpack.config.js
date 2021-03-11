@@ -83,6 +83,8 @@ module.exports = {
     maxAssetSize: 512000
   },
   devServer: {
+    // disableDotRule: true,
+    // // index: paths.publicUrlOrPath,
     historyApiFallback: true,
   }
 }

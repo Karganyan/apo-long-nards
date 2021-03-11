@@ -5,6 +5,7 @@ import SuperMind from '../SuperMind/SuperMind';
 
 function App() {
   
+  
   return (
     <>
       <Switch>
