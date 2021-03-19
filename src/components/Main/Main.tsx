@@ -10,9 +10,7 @@ function Main() {
       <div className='emersion'>Это длинные нарды!</div>
       <div className='emersion2'>Выбери режим:</div>
       <div className='choiseConteiner'>
-        <Link to="/supermind">
-          <div className='choiseBox'>cверхразум</div>
-        </Link>
+        <div className='choiseBox'>cверхразум</div>
         <div className='choiseBox'>онлайн</div>
       </div>
     </div>

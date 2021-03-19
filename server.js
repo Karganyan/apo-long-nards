@@ -39,6 +39,11 @@ wsServer.on('close', () => {
   console.log('good bye');
 });
 
+//realized react app routing with react-router-dom 
+app.get('/*', function(req,res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
 //server listen port
 const PORT = process.env.PORT ?? 3000;
 
