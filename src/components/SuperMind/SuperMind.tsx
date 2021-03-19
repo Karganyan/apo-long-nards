@@ -1,10 +1,6 @@
 import * as React from 'react';
-import { useLocation } from 'react-router';
 
 function SuperMind() {
-
-  const location = useLocation()
-  console.log(location);
 
   return (
     <div >
