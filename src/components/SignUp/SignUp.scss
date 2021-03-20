@@ -1,0 +1,40 @@
+@import '../Main/Main';
+
+.input {
+  margin: 30px;
+  padding: 0.8rem;
+  border:rgb(196, 194, 194) 1px solid;
+  width: 15rem;
+  border-radius: 10px; 
+  animation: showInput 1s;
+  box-shadow: 0 0 1px 1px rgb(224, 224, 224);
+  outline: 0;
+  outline-offset: 0;
+
+  &:focus {
+    box-shadow: 0 0 5px 2px rgb(167, 166, 166);  
+  }
+
+  @keyframes showInput{
+    0% {
+      border: white 1px solid;
+    }
+  }
+}
+
+.greyButton {
+  width: 10rem;
+  border-radius: 15px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+
+  &:hover{
+    box-shadow: 0 0 5px 2px rgb(167, 166, 166);  
+
+    cursor: pointer;
+  }
+
+  &:active {
+    box-shadow: 0 0 3px 2px rgb(167, 166, 166);  
+  }
+}

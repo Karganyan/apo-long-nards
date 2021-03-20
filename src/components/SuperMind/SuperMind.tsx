@@ -4,7 +4,7 @@ function SuperMind() {
 
   return (
     <div >
-      <h1>Hello! this is game with supermind!</h1>
+      <h1>Этот режим сейчас в разработке</h1>
     </div>
   )
 }

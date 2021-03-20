@@ -1,0 +1,84 @@
+%emersion {
+  position: relative;
+  color: rgb(63, 61, 61);
+  animation: showEmersion 0.6s ease-in-out;  
+
+  & a {
+    color: rgb(82, 82, 250);
+  }
+}
+
+.emersion {
+  @extend %emersion;
+  margin-bottom: 20px;
+}
+
+.emersion2 {
+  @extend %emersion;
+  animation: showEmersion 0.8s ease-in-out;
+}
+
+
+@keyframes showEmersion {
+  0% {
+    top: 10rem;
+    color: rgba(200, 200, 200, 0.1);
+  }
+  100% {
+    top: 0;
+    color: rgb(63, 61, 61);
+  }
+}
+
+.conteiner{
+  margin-top: 8rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.choiseConteiner {
+  display: flex;
+}
+
+a {
+  text-decoration: none;
+}
+
+.rules-div{
+  text-align: center;
+  font-size: medium;
+
+  & a:hover {
+    text-decoration: underline;
+  }
+}
+
+.choiseBox {
+  margin: 30px;
+  padding: 0.8rem;
+  border:rgb(207, 206, 206) 1px solid;
+  width: 20rem;
+  border-radius: 20px;  
+  animation: showChoise 1s;
+  text-align: center;
+  box-shadow: 0 0 1px 1px rgb(224, 224, 224);
+  color: rgb(63, 61, 61);
+
+  &:hover {
+    box-shadow: 0 0 5px 2px rgb(167, 166, 166);  
+    cursor: pointer;
+  }
+
+  &:active {
+    box-shadow: 0 0 3px 2px rgb(167, 166, 166);  
+  }
+
+  @keyframes showChoise {
+    0%,100% {    
+      visibility: hidden;
+    }
+  }
+}
+
+
