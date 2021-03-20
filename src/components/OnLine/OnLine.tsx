@@ -2,8 +2,8 @@ import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import PreGameRoom from '../PreGameRoom/PreGameRoom';
-import { CONNECT_USER } from '../../redux/types/user';
 import { addNameAC, connectUserAC } from '../../redux/actions/user';
+
 
 function OnLine() {
   const dispatch = useDispatch();
@@ -17,6 +17,8 @@ function OnLine() {
     history.push('signup')
   }
 
+  console.log(process.env.PORT);
+  
   return (
     <>
       <PreGameRoom />

@@ -29,7 +29,6 @@ const App = () => {
   }
 
   function connect() {
-
     wsClient = new WebSocket(
       // window.location.origin.replace('http', 'ws')
       'ws://localhost:3000'
