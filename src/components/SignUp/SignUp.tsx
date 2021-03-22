@@ -7,7 +7,7 @@ import './SignUp.scss';
 
 function SignUp() {
   const dispatch = useDispatch();
-  const history = useHistory()
+  const history = useHistory();
   const [name, setName] = useState('');
   const [placeholder, setPlaceholder] = useState('');
 
@@ -23,7 +23,6 @@ function SignUp() {
 
   const addUserhandler = (): void => {
     dispatch(addNameAC(name));
-    dispatch(connectUserAC());
     history.push('/online')
   }
 

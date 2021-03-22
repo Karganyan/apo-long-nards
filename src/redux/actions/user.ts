@@ -1,5 +1,7 @@
 import { ADD_NAME, CONNECT_USER } from "../types/user";
 
+//-------------action-creators-------------//
+
 interface AC {
   type: string,
   payload?: any,

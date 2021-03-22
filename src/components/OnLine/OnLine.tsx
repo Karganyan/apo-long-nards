@@ -14,16 +14,10 @@ function OnLine() {
     dispatch(addNameAC(store.user.name));
     dispatch(connectUserAC());
   } else {
-    history.push('signup')
+    history.push('signup');
   }
 
-  console.log(process.env.PORT);
-  
-  return (
-    <>
-      <PreGameRoom />
-    </>
-  )
+  return <PreGameRoom />
 }
 
 export default OnLine;

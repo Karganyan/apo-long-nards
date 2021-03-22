@@ -1,3 +1,4 @@
+import { connect } from 'mongoose';
 import * as React from 'react';
 import { useState } from 'react'
 import { isWsOpen } from '../../helpers';
@@ -68,6 +69,7 @@ const App = () => {
       }
     }
   }
+
 
   document.addEventListener("DOMContentLoaded", connect)
 
